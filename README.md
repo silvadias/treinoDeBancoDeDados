@@ -56,7 +56,7 @@ networks:
 ```bash
 docker-compose up -d  
 ```
-4. Aguarde o sistema crar as imagens e subir os serviços  
+4. Aguarde o sistema criar as imagens e subir os serviços  
 5. Abra [http://localhost:3000](http://localhost:3000)
 
 Use:
@@ -73,7 +73,7 @@ Após login:
 3. Preencha os dados:
 
 ```yaml
-Name: SQL Server Treino
+Name: SQL Server Treino (Obs: Dê qualquer nome que considerar pertinente) 
 Driver: Microsoft SQL Server
 Host: sqlserver
 Port: 1433
