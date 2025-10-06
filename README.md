@@ -5,7 +5,7 @@ Ambiente inicial para treinamento de banco de dados.
 
 
 
-## 1. Subir o Docer-composer e Fazer login no SQLPad  
+## 1. Subir o Docker-composer e Fazer login no SQLPad  
   
 1. É requisito ter o docker e docker-compose instalado no sistema.  
 2. Clone este repositório ou cole o arquivo YML numa pasta do seu computador.  
