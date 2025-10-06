@@ -3,8 +3,61 @@ Ambiente inicial para treinamento de banco de dados.
 
 # 📊 Primeiros passos no SQLPad
 
-## 1. Fazer login no SQLPad
-Abra [http://localhost:3000](http://localhost:3000)
+
+
+## 1. Subir o Docer-composer e Fazer login no SQLPad  
+  
+1. É requisito ter o docker e docker-compose instalado no sistema.  
+2. Clone este repositório ou cole o arquivo YML numa pasta do seu computador.  
+
+---
+
+## 🐳 Arquivo `docker-compose.yml`
+
+```yaml
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      - SA_PASSWORD=Treino123!
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Developer        
+    ports:
+      - "1433:1433"
+    volumes:
+      - dadosSqlServer:/var/opt/mssql
+      - ./scriptsSqlServer:/scripts
+
+  sqlpad:
+    image: sqlpad/sqlpad:latest
+    container_name: sqlpad
+    environment:
+      - SQLPAD_ADMIN=Treino
+      - SQLPAD_ADMIN_PASSWORD=Treino
+    ports:
+      - "3000:3000"
+    depends_on:
+      - sqlserver
+
+volumes:
+  dadosSqlServer:
+
+networks:
+  mssqlTreino:
+    driver: bridge
+```
+
+
+3. Dentro da pasta, abra o terminal e escreva o comando:  
+  
+```bash
+docker-compose up -d  
+```
+4. Aguarde o sistema crar as imagens e subir os serviços  
+5. Abra [http://localhost:3000](http://localhost:3000)
 
 Use:
 - **Usuário**: `Treino`  
@@ -171,40 +224,4 @@ ports:
 
 ```bash
 docker-compose down -v
-```
-
----
-
-## 🐳 Arquivo `docker-compose.yml`
-
-```yaml
-version: '3.8'
-
-services:
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: sqlserver
-    environment:
-      - SA_PASSWORD=Treino123!
-      - ACCEPT_EULA=Y
-      - MSSQL_PID=Developer        
-    ports:
-      - "1433:1433"
-    volumes:
-      - dadosSqlServer:/var/opt/mssql
-      - ./scriptsSqlServer:/scripts
-
-  sqlpad:
-    image: sqlpad/sqlpad:latest
-    container_name: sqlpad
-    environment:
-      - SQLPAD_ADMIN=Treino
-      - SQLPAD_ADMIN_PASSWORD=Treino
-    ports:
-      - "3000:3000"
-    depends_on:
-      - sqlserver
-
-volumes:
-  dadosSqlServer:
 ```
